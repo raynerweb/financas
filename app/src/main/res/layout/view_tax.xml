@@ -7,7 +7,7 @@
 
         <variable
             name="tax"
-            type="br.com.rayner.portugal.financas.ui.model.Tax" />
+            type="br.com.raynerweb.portugal.financas.ui.model.Tax" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
