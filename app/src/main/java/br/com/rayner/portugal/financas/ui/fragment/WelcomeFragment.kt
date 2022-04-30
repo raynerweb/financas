@@ -1,4 +1,4 @@
-package br.com.rayner.portugal.financas.ui
+package br.com.rayner.portugal.financas.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

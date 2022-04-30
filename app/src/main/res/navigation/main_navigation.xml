@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="br.com.rayner.portugal.financas.ui.WelcomeFragment"
+        android:name="br.com.rayner.portugal.financas.ui.fragment.WelcomeFragment"
         android:label="WelcomeFragment"
         tools:layout="@layout/fragment_welcome">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/taxTableFragment"
-        android:name="br.com.rayner.portugal.financas.ui.TaxTableFragment"
+        android:name="br.com.rayner.portugal.financas.ui.fragment.TaxTableFragment"
         android:label="fragment_tax_table"
         tools:layout="@layout/fragment_tax_table" />
 

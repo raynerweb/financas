@@ -2,6 +2,11 @@
     <string name="app_name">Financas</string>
     <string name="simulador_financas_bem_vindo">Simulador de Financas de Portugal. %1$s%2$s  \nBem vindo!</string>
     <string name="proximo">Próximo</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="renda_liquida">€ %1$s</string>
+    <string name="renda_ate">Até: € %1$s</string>
+    <string name="qtde_filhos">Quantidade de filhos: %1$s</string>
+    <string name="casado">Casado: %1$s</string>
+    <string name="deficiencia">Possui deficiência: %1$s</string>
+    <string name="imposto">Imposto: %1$s %</string>
 </resources>
