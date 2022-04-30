@@ -3,12 +3,14 @@
     <string name="simulador_financas_bem_vindo">Simulador de Financas de Portugal. %1$s%2$s  \nBem vindo!</string>
     <string name="proximo">Próximo</string>
 
-    <string name="renda_liquida">€ %1$s</string>
+    <string name="renda_liquida">Renda Líquida: € %1$s</string>
     <string name="renda_ate">Até: € %1$s</string>
     <string name="qtde_filhos">Quantidade de filhos: %1$s</string>
     <string name="casado">Casado: %1$s</string>
     <string name="deficiencia">Possui deficiência: %1$s</string>
-    <string name="imposto">Imposto: %1$s %</string>
+    <string name="imposto">Imposto: %1$s</string>
     <string name="informe_sua_renda">Informe sua renda</string>
     <string name="aplicar_filtro">Aplicar Filtro</string>
+    <string name="eh_casado">É Casado?</string>
+    <string name="eh_deficiente">É deficiente</string>
 </resources>

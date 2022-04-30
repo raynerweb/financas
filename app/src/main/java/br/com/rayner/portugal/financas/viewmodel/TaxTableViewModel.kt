@@ -22,11 +22,10 @@ class TaxTableViewModel @Inject constructor(
         get() = application.applicationContext
 
     val rendaMaxima = MutableLiveData<String>()
+    val isCasado = MutableLiveData<Boolean>()
+    val isDeficiente = MutableLiveData<Boolean>()
 
     private val _impostos = MutableLiveData<List<Imposto>>()
-    private val _taxTable = MutableLiveData<List<Tax>>()
-
-    //    val taxTable: LiveData<List<Tax>> get() = _taxTable
     val taxTable = MediatorLiveData<List<Tax>>()
 
     init {
@@ -36,45 +35,54 @@ class TaxTableViewModel @Inject constructor(
         taxTable.addSource(rendaMaxima) {
             prepare(_impostos.value)
         }
+        taxTable.addSource(isCasado) {
+            prepare(_impostos.value)
+        }
+        taxTable.addSource(isDeficiente) {
+            prepare(_impostos.value)
+        }
     }
 
     private fun prepare(
-        impostos: List<Imposto>?
+        impostos: List<Imposto>? = emptyList()
     ) {
+
         val rendaString = rendaMaxima.value ?: "0"
         val renda = if (TextUtils.isEmpty(rendaString)) 0.0 else rendaString.toDouble()
+        val informouRenda = renda > 0.0
 
-        if (renda > 0.0) {
-            taxTable.value =
-                impostos?.filter { imposto -> renda <= imposto.rendaLimite }?.map { imposto ->
-                    Tax(
-                        rendaLimite = context.getString(
-                            R.string.renda_ate,
-                            imposto.rendaLimite.toString()
-                        ),
-                        porcentagemImposto = imposto.porcentagemImposto.toString(),
-                        qtdeFilhos = context.getString(
-                            R.string.qtde_filhos,
-                            imposto.qtdeFilhos.toString()
-                        ),
-                        deficiente = context.getString(
-                            R.string.deficiencia,
-                            if (imposto.deficiente) "Sim" else "Não"
-                        ),
-                        casado = context.getString(
-                            R.string.casado,
-                            if (imposto.casado) "Sim" else "Não"
-                        )
-                    )
-                }
-        } else {
-            taxTable.value = impostos?.map { imposto ->
+        impostos?.let {
+            var impostosFiltrados = it
+
+            isDeficiente.value?.let { deficiente ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.deficiente == deficiente }
+            }
+
+            isCasado.value?.let { casado ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.deficiente == casado }
+            }
+
+            if (renda > 0.0) {
+                impostosFiltrados =
+                    mutableListOf(impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
+                        .first())
+            }
+
+            taxTable.value = impostosFiltrados.map { imposto ->
                 Tax(
+                    rendaLiquida = if (informouRenda)
+                        (renda - (renda * imposto.imposto)).toString() else
+                        (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString(),
                     rendaLimite = context.getString(
                         R.string.renda_ate,
                         imposto.rendaLimite.toString()
                     ),
-                    porcentagemImposto = imposto.porcentagemImposto.toString(),
+                    porcentagemImposto = context.getString(
+                        R.string.imposto,
+                        imposto.porcentagemImposto
+                    ),
                     qtdeFilhos = context.getString(
                         R.string.qtde_filhos,
                         imposto.qtdeFilhos.toString()
@@ -91,16 +99,6 @@ class TaxTableViewModel @Inject constructor(
             }
         }
 
-//        var orderedList = list.sortedBy { imposto -> imposto.rendaLimite }
-//        val filter = _filter.value ?: ""
-//        if (filter.isNotBlank()) {
-//            orderedList = orderedList.filter { it.name.contains(filter, ignoreCase = true) }
-//        }
-//        val sortSelect = sort.value ?: SortSelect.ASC
-//        if (sortSelect == SortSelect.DESC) {
-//            orderedList = orderedList.reversed()
-//        }
-//        pokemons.value = orderedList
     }
 
     fun getTaxTable() = viewModelScope.launch {

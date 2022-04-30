@@ -5,5 +5,6 @@ data class Imposto(
     val casado: Boolean,
     val deficiente: Boolean,
     val qtdeFilhos: Int,
-    val porcentagemImposto: Double
+    val porcentagemImposto: String,
+    val imposto: Double
 )
