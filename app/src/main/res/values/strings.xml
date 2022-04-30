@@ -9,4 +9,6 @@
     <string name="casado">Casado: %1$s</string>
     <string name="deficiencia">Possui deficiência: %1$s</string>
     <string name="imposto">Imposto: %1$s %</string>
+    <string name="informe_sua_renda">Informe sua renda</string>
+    <string name="aplicar_filtro">Aplicar Filtro</string>
 </resources>
