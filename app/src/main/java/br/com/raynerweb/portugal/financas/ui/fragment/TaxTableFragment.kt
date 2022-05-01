@@ -17,6 +17,10 @@ import br.com.raynerweb.portugal.financas.ui.adapter.TaxAdapter
 import br.com.raynerweb.portugal.financas.viewmodel.TaxTableViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
+import android.widget.Toast
+
 
 @AndroidEntryPoint
 class TaxTableFragment : Fragment() {
@@ -65,6 +69,16 @@ class TaxTableFragment : Fragment() {
         dialogBinding.fragment = this
         dialogBinding.viewModel = viewModel
         dialogBinding.lifecycleOwner = this
+
+        dialogBinding.qtdeFilhos.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                dialogBinding.tvQtdeFilhos.text = progress.toString()
+                viewModel.updateChildren(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
 
         dialogFilter = BottomSheetDialog(requireContext())
         dialogFilter.setContentView(dialogBinding.root)
