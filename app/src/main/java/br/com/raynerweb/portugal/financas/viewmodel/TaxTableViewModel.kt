@@ -23,11 +23,11 @@ class TaxTableViewModel @Inject constructor(
     protected val context
         get() = application.applicationContext
 
-    val rendaMaxima = MutableLiveData<String?>()
-    val isCasado = MutableLiveData<Boolean?>()
-    val isDeficiente = MutableLiveData<Boolean?>()
-    val possuiDoisTitulares = MutableLiveData<Boolean?>()
-    val qtdeFilhos = MutableLiveData<Int?>()
+    val rendaMaxima = MutableLiveData("")
+    val isCasado = MutableLiveData(false)
+    val isDeficiente = MutableLiveData(false)
+    val possuiDoisTitulares = MutableLiveData(false)
+    val qtdeFilhos = MutableLiveData(0)
 
     private val _impostos = MutableLiveData<List<Imposto>>()
     val taxTable = MediatorLiveData<List<Tax>>()
@@ -81,13 +81,19 @@ class TaxTableViewModel @Inject constructor(
 
             qtdeFilhos.value?.let { qtdeFilhos ->
                 impostosFiltrados =
-                    impostosFiltrados.filter { imposto -> imposto.qtdeFilhos >= qtdeFilhos }
+                    impostosFiltrados.filter { imposto -> imposto.qtdeFilhos == qtdeFilhos }
             }
 
             if (renda > 0.0) {
                 impostosFiltrados =
-                    mutableListOf(impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
-                        .first())
+                    if (impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
+                            .isEmpty()) {
+                        mutableListOf(impostosFiltrados.last())
+                    } else {
+                        mutableListOf(impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
+                            .first())
+                    }
+
             }
 
             taxTable.value = impostosFiltrados.map { imposto ->
@@ -139,10 +145,10 @@ class TaxTableViewModel @Inject constructor(
 
     fun clearFilter() {
         rendaMaxima.postValue("")
-        isCasado.postValue(null)
-        isDeficiente.postValue(null)
-        possuiDoisTitulares.postValue(null)
-        qtdeFilhos.postValue(null)
+        isCasado.postValue(false)
+        isDeficiente.postValue(false)
+        possuiDoisTitulares.postValue(false)
+        qtdeFilhos.postValue(0)
     }
 
     fun updateChildren(progress: Int) {
