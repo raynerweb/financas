@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/tv_renda_liquida"
-            style="?attr/textAppearanceHeadline4"
+            style="?attr/textAppearanceHeadline5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingStart="16dp"
