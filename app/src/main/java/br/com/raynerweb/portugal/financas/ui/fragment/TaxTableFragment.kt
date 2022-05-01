@@ -82,6 +82,11 @@ class TaxTableFragment : Fragment() {
         dialogFilter.dismiss()
     }
 
+    fun clearFilter(view: View) {
+        viewModel.clearFilter()
+        dialogFilter.dismiss()
+    }
+
     fun showFilter(view: View) {
         dialogFilter.show()
     }

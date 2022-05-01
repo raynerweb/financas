@@ -14,6 +14,6 @@
     <string name="eh_casado">É Casado?</string>
     <string name="eh_deficiente">É deficiente</string>
     <string name="ok">OK</string>
-    <string name="cancelar">Cancelar</string>
+    <string name="remover_filtros">Remover Filtros</string>
     <string name="tax_table">Tabela de impostos</string>
 </resources>

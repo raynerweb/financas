@@ -20,9 +20,9 @@ class TaxTableViewModel @Inject constructor(
     protected val context
         get() = application.applicationContext
 
-    val rendaMaxima = MutableLiveData<String>()
-    val isCasado = MutableLiveData<Boolean>()
-    val isDeficiente = MutableLiveData<Boolean>()
+    val rendaMaxima = MutableLiveData<String?>()
+    val isCasado = MutableLiveData<Boolean?>()
+    val isDeficiente = MutableLiveData<Boolean?>()
 
     private val _impostos = MutableLiveData<List<Imposto>>()
     val taxTable = MediatorLiveData<List<Tax>>()
@@ -70,10 +70,18 @@ class TaxTableViewModel @Inject constructor(
             }
 
             taxTable.value = impostosFiltrados.map { imposto ->
+                val rendaLiquidaInformada = context.getString(
+                    R.string.renda_liquida,
+                    (renda - (renda * imposto.imposto)).toString()
+                )
+                val rendaLiquidaPadrao = context.getString(
+                    R.string.renda_liquida,
+                    (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString()
+                )
                 Tax(
                     rendaLiquida = if (informouRenda)
-                        (renda - (renda * imposto.imposto)).toString() else
-                        (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString(),
+                        rendaLiquidaInformada else
+                        rendaLiquidaPadrao,
                     rendaLimite = context.getString(
                         R.string.renda_ate,
                         imposto.rendaLimite.toString()
@@ -102,6 +110,12 @@ class TaxTableViewModel @Inject constructor(
 
     fun getTaxTable() = viewModelScope.launch {
         _impostos.postValue(irsRepository.getAll())
+    }
+
+    fun clearFilter() {
+        rendaMaxima.postValue("")
+        isCasado.postValue(null)
+        isDeficiente.postValue(null)
     }
 
 }
