@@ -1,12 +1,13 @@
 package br.com.raynerweb.portugal.financas.ui.fragment
 
-import android.animation.AnimatorInflater
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +18,6 @@ import br.com.raynerweb.portugal.financas.ui.adapter.TaxAdapter
 import br.com.raynerweb.portugal.financas.viewmodel.TaxTableViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
-import android.widget.Toast
 
 
 @AndroidEntryPoint

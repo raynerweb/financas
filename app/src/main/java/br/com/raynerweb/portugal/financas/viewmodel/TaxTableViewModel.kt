@@ -2,7 +2,10 @@ package br.com.raynerweb.portugal.financas.viewmodel
 
 import android.app.Application
 import android.text.TextUtils
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.raynerweb.portugal.financas.R
 import br.com.raynerweb.portugal.financas.domain.repository.IRSRepository
 import br.com.raynerweb.portugal.financas.domain.repository.model.Imposto
