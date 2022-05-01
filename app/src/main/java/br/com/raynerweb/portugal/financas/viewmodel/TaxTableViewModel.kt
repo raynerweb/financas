@@ -23,6 +23,8 @@ class TaxTableViewModel @Inject constructor(
     val rendaMaxima = MutableLiveData<String?>()
     val isCasado = MutableLiveData<Boolean?>()
     val isDeficiente = MutableLiveData<Boolean?>()
+    val possuiDoisTitulares = MutableLiveData<Boolean?>()
+    val qtdeFilhos = MutableLiveData<Int?>()
 
     private val _impostos = MutableLiveData<List<Imposto>>()
     val taxTable = MediatorLiveData<List<Tax>>()
@@ -38,6 +40,12 @@ class TaxTableViewModel @Inject constructor(
             prepare(_impostos.value)
         }
         taxTable.addSource(isDeficiente) {
+            prepare(_impostos.value)
+        }
+        taxTable.addSource(possuiDoisTitulares) {
+            prepare(_impostos.value)
+        }
+        taxTable.addSource(qtdeFilhos) {
             prepare(_impostos.value)
         }
     }
@@ -61,6 +69,16 @@ class TaxTableViewModel @Inject constructor(
             isCasado.value?.let { casado ->
                 impostosFiltrados =
                     impostosFiltrados.filter { imposto -> imposto.casado == casado }
+            }
+
+            possuiDoisTitulares.value?.let { doisTitulares ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.unicoTitular != doisTitulares }
+            }
+
+            qtdeFilhos.value?.let { qtdeFilhos ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.qtdeFilhos >= qtdeFilhos }
             }
 
             if (renda > 0.0) {
@@ -120,6 +138,12 @@ class TaxTableViewModel @Inject constructor(
         rendaMaxima.postValue("")
         isCasado.postValue(null)
         isDeficiente.postValue(null)
+        possuiDoisTitulares.postValue(null)
+        qtdeFilhos.postValue(null)
+    }
+
+    fun updateChildren(progress: Int) {
+        qtdeFilhos.postValue(progress)
     }
 
 }
