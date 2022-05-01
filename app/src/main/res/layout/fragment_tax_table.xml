@@ -88,6 +88,7 @@
             android:layout_marginBottom="16dp"
             android:clickable="true"
             android:contentDescription="@string/proximo"
+            android:onClick="@{fragment::showFilter}"
             android:src="@drawable/ic_baseline_filter_alt_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

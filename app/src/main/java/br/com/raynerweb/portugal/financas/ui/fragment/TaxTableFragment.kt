@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.raynerweb.portugal.financas.databinding.FragmentTaxTableBinding
+import br.com.raynerweb.portugal.financas.databinding.ViewTaxFilterBinding
 import br.com.raynerweb.portugal.financas.ui.adapter.TaxAdapter
 import br.com.raynerweb.portugal.financas.viewmodel.TaxTableViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +20,8 @@ class TaxTableFragment : Fragment() {
 
     private lateinit var binding: FragmentTaxTableBinding
     private val viewModel: TaxTableViewModel by viewModels()
+
+    private lateinit var dialogFilter: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +44,21 @@ class TaxTableFragment : Fragment() {
     }
 
     private fun setupViews() {
+        setupBottomSheetDialog()
+
         binding.rvTax.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun setupBottomSheetDialog() {
+        val inflater = LayoutInflater.from(requireContext())
+        val dialogBinding = ViewTaxFilterBinding.inflate(inflater)
+        dialogBinding.fragment = this
+        dialogBinding.viewModel = viewModel
+        dialogBinding.lifecycleOwner = this
+
+        dialogFilter = BottomSheetDialog(requireContext())
+        dialogFilter.setContentView(dialogBinding.root)
     }
 
     private fun subscribe() {
@@ -51,5 +68,14 @@ class TaxTableFragment : Fragment() {
             }
         }
     }
+
+    fun dismisDialog(view: View) {
+        dialogFilter.dismiss()
+    }
+
+    fun showFilter(view: View) {
+        dialogFilter.show()
+    }
+
 
 }
