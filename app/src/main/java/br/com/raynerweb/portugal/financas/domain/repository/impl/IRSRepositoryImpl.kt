@@ -18,6 +18,7 @@ class IRSRepositoryImpl @Inject constructor(
             Imposto(
                 casado = dto.casado,
                 deficiente = dto.deficiente,
+                unicoTitular = dto.qtdeTitular < 2,
                 qtdeFilhos = dto.qtdeFilhos,
                 imposto = dto.porcentagemImposto.replace("%", "").toDouble().div(100.0),
                 porcentagemImposto = dto.porcentagemImposto,

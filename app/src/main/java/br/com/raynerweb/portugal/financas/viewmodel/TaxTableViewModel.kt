@@ -60,7 +60,7 @@ class TaxTableViewModel @Inject constructor(
 
             isCasado.value?.let { casado ->
                 impostosFiltrados =
-                    impostosFiltrados.filter { imposto -> imposto.deficiente == casado }
+                    impostosFiltrados.filter { imposto -> imposto.casado == casado }
             }
 
             if (renda > 0.0) {
@@ -79,6 +79,10 @@ class TaxTableViewModel @Inject constructor(
                     (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString()
                 )
                 Tax(
+                    doisTitulares = context.getString(
+                        R.string.dois_titulares,
+                        if (imposto.unicoTitular) "Não" else "Sim"
+                    ),
                     rendaLiquida = if (informouRenda)
                         rendaLiquidaInformada else
                         rendaLiquidaPadrao,
