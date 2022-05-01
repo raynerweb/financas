@@ -2,7 +2,7 @@
     <string name="app_name">Financas</string>
     <string name="simulador_financas_bem_vindo">Simulador de Financas de Portugal. %1$s%2$s  \nBem vindo!</string>
     <string name="proximo">Próximo</string>
-
+    <string name="dois_titulares">Dois Titulares: %1$s</string>
     <string name="renda_liquida">Renda Líquida: € %1$s</string>
     <string name="renda_ate">Até: € %1$s</string>
     <string name="qtde_filhos">Quantidade de filhos: %1$s</string>
@@ -12,5 +12,12 @@
     <string name="informe_sua_renda">Informe sua renda</string>
     <string name="aplicar_filtro">Aplicar Filtro</string>
     <string name="eh_casado">É Casado?</string>
-    <string name="eh_deficiente">É deficiente</string>
+    <string name="dois_titulares_">Dois titulares</string>
+    <string name="filtro_qtde_filhos">Quantidade de filhos</string>
+    <string name="possui_deficiente">Possui deficiência</string>
+    <string name="ok">OK</string>
+    <string name="remover_filtros">Remover Filtros</string>
+    <string name="tax_table">Tabela de impostos</string>
+    <string name="filtros">Filtros</string>
+    <string name="zero">0</string>
 </resources>

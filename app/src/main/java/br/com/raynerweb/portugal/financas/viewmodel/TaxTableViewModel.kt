@@ -2,7 +2,10 @@ package br.com.raynerweb.portugal.financas.viewmodel
 
 import android.app.Application
 import android.text.TextUtils
-import androidx.lifecycle.*
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.com.raynerweb.portugal.financas.R
 import br.com.raynerweb.portugal.financas.domain.repository.IRSRepository
 import br.com.raynerweb.portugal.financas.domain.repository.model.Imposto
@@ -20,9 +23,11 @@ class TaxTableViewModel @Inject constructor(
     protected val context
         get() = application.applicationContext
 
-    val rendaMaxima = MutableLiveData<String>()
-    val isCasado = MutableLiveData<Boolean>()
-    val isDeficiente = MutableLiveData<Boolean>()
+    val rendaMaxima = MutableLiveData("")
+    val isCasado = MutableLiveData(false)
+    val isDeficiente = MutableLiveData(false)
+    val possuiDoisTitulares = MutableLiveData(false)
+    val qtdeFilhos = MutableLiveData(0)
 
     private val _impostos = MutableLiveData<List<Imposto>>()
     val taxTable = MediatorLiveData<List<Tax>>()
@@ -38,6 +43,12 @@ class TaxTableViewModel @Inject constructor(
             prepare(_impostos.value)
         }
         taxTable.addSource(isDeficiente) {
+            prepare(_impostos.value)
+        }
+        taxTable.addSource(possuiDoisTitulares) {
+            prepare(_impostos.value)
+        }
+        taxTable.addSource(qtdeFilhos) {
             prepare(_impostos.value)
         }
     }
@@ -60,20 +71,48 @@ class TaxTableViewModel @Inject constructor(
 
             isCasado.value?.let { casado ->
                 impostosFiltrados =
-                    impostosFiltrados.filter { imposto -> imposto.deficiente == casado }
+                    impostosFiltrados.filter { imposto -> imposto.casado == casado }
+            }
+
+            possuiDoisTitulares.value?.let { doisTitulares ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.unicoTitular != doisTitulares }
+            }
+
+            qtdeFilhos.value?.let { qtdeFilhos ->
+                impostosFiltrados =
+                    impostosFiltrados.filter { imposto -> imposto.qtdeFilhos == qtdeFilhos }
             }
 
             if (renda > 0.0) {
                 impostosFiltrados =
-                    mutableListOf(impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
-                        .first())
+                    if (impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
+                            .isEmpty()) {
+                        mutableListOf(impostosFiltrados.last())
+                    } else {
+                        mutableListOf(impostosFiltrados.filter { imposto -> renda <= imposto.rendaLimite }
+                            .first())
+                    }
+
             }
 
             taxTable.value = impostosFiltrados.map { imposto ->
+                val rendaLiquidaInformada = context.getString(
+                    R.string.renda_liquida,
+                    (renda - (renda * imposto.imposto)).toString()
+                )
+                val rendaLiquidaPadrao = context.getString(
+                    R.string.renda_liquida,
+                    (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString()
+                )
                 Tax(
+                    doisTitulares = context.getString(
+                        R.string.dois_titulares,
+                        if (imposto.unicoTitular) "Não" else "Sim"
+                    ),
                     rendaLiquida = if (informouRenda)
-                        (renda - (renda * imposto.imposto)).toString() else
-                        (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString(),
+                        rendaLiquidaInformada else
+                        rendaLiquidaPadrao,
                     rendaLimite = context.getString(
                         R.string.renda_ate,
                         imposto.rendaLimite.toString()
@@ -102,6 +141,18 @@ class TaxTableViewModel @Inject constructor(
 
     fun getTaxTable() = viewModelScope.launch {
         _impostos.postValue(irsRepository.getAll())
+    }
+
+    fun clearFilter() {
+        rendaMaxima.postValue("")
+        isCasado.postValue(false)
+        isDeficiente.postValue(false)
+        possuiDoisTitulares.postValue(false)
+        qtdeFilhos.postValue(0)
+    }
+
+    fun updateChildren(progress: Int) {
+        qtdeFilhos.postValue(progress)
     }
 
 }

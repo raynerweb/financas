@@ -16,7 +16,7 @@
 
         <TextView
             android:id="@+id/tv_renda_liquida"
-            style="?attr/textAppearanceHeadline4"
+            style="?attr/textAppearanceHeadline5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingStart="16dp"
@@ -69,6 +69,19 @@
             tools:text="@string/casado" />
 
         <TextView
+            android:id="@+id/tv_num_titulares"
+            style="?attr/textAppearanceBody2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@{tax.doisTitulares}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_casado"
+            tools:text="@string/dois_titulares" />
+
+        <TextView
             android:id="@+id/tv_deficiente"
             style="?attr/textAppearanceBody2"
             android:layout_width="0dp"
@@ -78,7 +91,7 @@
             android:text="@{tax.deficiente}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_casado"
+            app:layout_constraintTop_toBottomOf="@+id/tv_num_titulares"
             tools:text="@string/deficiencia" />
 
         <TextView
