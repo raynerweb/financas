@@ -1,7 +1,7 @@
 package br.com.raynerweb.portugal.financas.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import br.com.raynerweb.portugal.financas.R
 import dagger.hilt.android.AndroidEntryPoint
 
