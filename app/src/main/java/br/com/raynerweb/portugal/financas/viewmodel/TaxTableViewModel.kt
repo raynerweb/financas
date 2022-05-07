@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.raynerweb.portugal.financas.R
 import br.com.raynerweb.portugal.financas.domain.repository.IRSRepository
 import br.com.raynerweb.portugal.financas.domain.repository.model.Imposto
+import br.com.raynerweb.portugal.financas.ext.toCurrency
 import br.com.raynerweb.portugal.financas.ui.model.Tax
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -99,11 +100,11 @@ class TaxTableViewModel @Inject constructor(
             taxTable.value = impostosFiltrados.map { imposto ->
                 val rendaLiquidaInformada = context.getString(
                     R.string.renda_liquida,
-                    (renda - (renda * imposto.imposto)).toString()
+                    (renda - (renda * imposto.imposto)).toCurrency()
                 )
                 val rendaLiquidaPadrao = context.getString(
                     R.string.renda_liquida,
-                    (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toString()
+                    (imposto.rendaLimite - (imposto.rendaLimite * imposto.imposto)).toCurrency()
                 )
                 Tax(
                     doisTitulares = context.getString(
@@ -115,7 +116,7 @@ class TaxTableViewModel @Inject constructor(
                         rendaLiquidaPadrao,
                     rendaLimite = context.getString(
                         R.string.renda_ate,
-                        imposto.rendaLimite.toString()
+                        imposto.rendaLimite.toCurrency()
                     ),
                     porcentagemImposto = context.getString(
                         R.string.imposto,

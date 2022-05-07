@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -80,6 +81,7 @@ class TaxTableFragment : Fragment() {
 
         dialogFilter = BottomSheetDialog(requireContext())
         dialogFilter.setContentView(dialogBinding.root)
+
     }
 
     private fun subscribe() {
@@ -88,6 +90,14 @@ class TaxTableFragment : Fragment() {
                 Log.d("TAX", tax.rendaLimite)
             }
         }
+
+        viewModel.isCasado.observe(viewLifecycleOwner) { isCasado ->
+            dialogFilter.findViewById<SwitchCompat>(R.id.switch_two_holders)?.apply {
+                isChecked = false
+                isEnabled = isCasado
+            }
+        }
+
     }
 
     fun dismisDialog(view: View) {
