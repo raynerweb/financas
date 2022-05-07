@@ -31,7 +31,7 @@
 
         <TextView
             android:id="@+id/tv_renda_ate"
-            style="?attr/textAppearanceBody2"
+            style="?attr/textAppearanceBody1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
@@ -47,6 +47,7 @@
             style="?attr/textAppearanceBody2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@{tax.qtdeFilhos}"
