@@ -1,15 +1,15 @@
 <resources>
-    <string name="app_name">Financas</string>
-    <string name="simulador_financas_bem_vindo">Simulador de Financas de Portugal. %1$s%2$s  \nBem vindo!</string>
+    <string name="app_name">IRS Portugal</string>
+    <string name="simulador_financas_bem_vindo">Calcule seu salário líquido. %1$s%2$s  \nBem vindo!</string>
     <string name="proximo">Próximo</string>
-    <string name="dois_titulares">Dois Titulares: %1$s</string>
-    <string name="renda_liquida">Renda Líquida: € %1$s</string>
-    <string name="renda_ate">Até: € %1$s</string>
+    <string name="dois_titulares">Dois titulares: %1$s</string>
+    <string name="renda_liquida">Salário Líquido: € %1$s</string>
+    <string name="renda_ate">Salário bruto até: € %1$s</string>
     <string name="qtde_filhos">Quantidade de filhos: %1$s</string>
     <string name="casado">Casado: %1$s</string>
-    <string name="deficiencia">Possui deficiência: %1$s</string>
+    <string name="deficiencia">Possui alguma deficiência: %1$s</string>
     <string name="imposto">Imposto: %1$s</string>
-    <string name="informe_sua_renda">Informe sua renda</string>
+    <string name="informe_sua_renda">Informe seu salário bruto</string>
     <string name="aplicar_filtro">Aplicar Filtro</string>
     <string name="eh_casado">É Casado?</string>
     <string name="dois_titulares_">Dois titulares</string>
