@@ -13,7 +13,7 @@ android {
         versionName "1.0.0"
 
         applicationId "br.com.raynerweb.portugal.financas"
-        minSdk 26
+        minSdk 28
         targetSdk 33
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
