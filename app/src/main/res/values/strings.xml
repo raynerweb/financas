@@ -20,4 +20,6 @@
     <string name="tax_table">Tabela de impostos</string>
     <string name="filtros">Filtros</string>
     <string name="zero">0</string>
+    <string name="check_privacy_policy">Consulte a política de privacidade</string>
+    <string name="privacy_policy_url" translatable="false">https://irsportugal.blogspot.com/2022/06/irs-portugal.html</string>
 </resources>

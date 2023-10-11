@@ -39,12 +39,27 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
+            android:id="@+id/iv_icon"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/app_name"
             android:src="@drawable/logo_tonnie"
+            app:layout_constraintBottom_toTopOf="@id/tv_privacy_policy"
+            app:layout_constraintEnd_toEndOf="@id/tv_privacy_policy"
+            app:layout_constraintStart_toStartOf="@id/tv_privacy_policy" />
+
+        <TextView
+            android:id="@+id/tv_privacy_policy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:textColor="?attr/colorPrimary"
+            android:onClick="@{fragment::privacyPolicy}"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/check_privacy_policy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
