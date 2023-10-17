@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IRS Portugal</string>
+    <string name="app_name">IRS Calculadora</string>
     <string name="simulador_financas_bem_vindo">Calcule seu salário líquido em Portugal. %1$s%2$s  \nBem vindo!</string>
     <string name="proximo">Próximo</string>
     <string name="dois_titulares">Dois titulares: %1$s</string>
@@ -20,6 +20,6 @@
     <string name="tax_table">Tabela de impostos</string>
     <string name="filtros">Filtros</string>
     <string name="zero">0</string>
-    <string name="check_privacy_policy">Consulte a política de privacidade</string>
+    <string name="check_privacy_policy">Política de privacidade</string>
     <string name="privacy_policy_url" translatable="false">https://irsportugal.blogspot.com/2022/06/irs-portugal.html</string>
 </resources>

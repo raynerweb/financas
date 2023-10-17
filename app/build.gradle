@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        versionCode 4
+        versionCode 5
         versionName "1.0.1"
 
         applicationId "br.com.raynerweb.portugal.financas"
