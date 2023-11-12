@@ -12,6 +12,7 @@
         <activity
             android:name="br.com.raynerweb.portugal.financas.ui.MainActivity"
             android:exported="true"
+            android:resizeableActivity="true"
             android:theme="@style/Theme.Financas">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
